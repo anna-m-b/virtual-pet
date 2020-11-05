@@ -7,7 +7,7 @@ We are also learning **TDD**. This project will come with a full test suite writ
 
 ### How will you be able to interact with this virtual pet?
 
-- [ ]  You can give them a name
+- [x]  You can give them a name
 - [ ]  They can get older
 - [ ]  As they get older, they get hungrier and less fit
 - [ ]  You can walk your pet to increase it's fitness. 🏃‍♂️

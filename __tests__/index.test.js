@@ -8,5 +8,9 @@ describe('Pet', () => {
    it('should return an object', () => {
       expect(new Pet('Fluffy')).toBeInstanceOf(Object);
   });
+
+  it('should have a name', () => {
+     expect(new Pet('Fluffy')).toHaveProperty('name', 'Fluffy');
+  })
 })
 
