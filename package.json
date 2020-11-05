@@ -1,0 +1,14 @@
+{
+  "name": "virtual_pet",
+  "version": "1.0.0",
+  "description": "Bootcamp project: Build a virtual pet.",
+  "main": "index.js",
+  "scripts": {
+    "test": "Jest"
+  },
+  "author": "Anna Balquin",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^26.6.3"
+  }
+}
