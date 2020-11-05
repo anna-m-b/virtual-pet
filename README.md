@@ -8,7 +8,7 @@ We are also learning **TDD**. This project will come with a full test suite writ
 ### How will you be able to interact with this virtual pet?
 
 - [x]  You can give them a name
-- [ ]  They can get older
+- [x]  They can get older
 - [ ]  As they get older, they get hungrier and less fit
 - [ ]  You can walk your pet to increase it's fitness. 🏃‍♂️
 - [ ]  You can feed your pet to decrease it's hunger. 🍕
@@ -18,7 +18,7 @@ We are also learning **TDD**. This project will come with a full test suite writ
 
 *Feature list taken from the Manchester Codes dashboard*
 
-I will be ticking these boxes as features are added.
+I'll be ticking these boxes as features are added.
 ***
 
 ## Getting Started

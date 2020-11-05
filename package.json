@@ -4,11 +4,12 @@
   "description": "Bootcamp project: Build a virtual pet.",
   "main": "index.js",
   "scripts": {
-    "test": "Jest"
+    "test": "jest --verbose --bail"
   },
   "author": "Anna Balquin",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "jest": "^26.6.3"
   }
+  
 }
