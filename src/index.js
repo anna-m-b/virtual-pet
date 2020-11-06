@@ -46,11 +46,13 @@ function checkFitness(pet) {
 }
 
 function Pet(name) {
-   this.living = true;
+   this.isAlive = true;
    this.name = name;
    this.age = 0;
    this.hunger = 50;
    this.fitness = 50;
+
+   this.start();
 }
 
 Pet.prototype = {

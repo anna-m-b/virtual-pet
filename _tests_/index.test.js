@@ -24,8 +24,8 @@ describe("Pet constructor", () => {
       expect(Fluffy).toHaveProperty("age", 0);
    })
 
-   it(`should have a "living" property set to true`, () => {
-      expect(Fluffy).toHaveProperty("living", true)
+   it(`should have a "isAlive" property set to true`, () => {
+      expect(Fluffy).toHaveProperty("isAlive", true)
    })
 
    it(`should have a "hunger" property set to 5`, () => {
