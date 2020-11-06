@@ -93,20 +93,18 @@ describe("an instance of Pet", () => {
    beforeEach(() => {
       Fluffy = new Pet("Fluffy");
    })
+   
+   jest.setTimeout(15000);
 
-   it("should get older by 1 every 10 seconds", () => {
+   it("should get older by 1 point, hungrier by 15 points and 10 points less fit every 10 seconds", done => {
+      
       Fluffy.start();
-      setTimeout( () => expect(Fluffy.age).toBe(2), 21000)
-   })
-
-   it("should lose 10 hunger points every 10 seconds", () => {
-      Fluffy.start();
-      setTimeout( () => expect(Fluffy.hunger).toBe(40), 11000)
-   })
-
-   it("should lose 5 fitness points every 10 seconds", () => {
-      Fluffy.start();
-      setTimeout( () => expect(Fluffy.fitness).toBe(45), 11000)
+      setTimeout(() =>  {
+         expect(Fluffy.age).toBe(1);
+         expect(Fluffy.hunger).toBe(65);
+         expect(Fluffy.fitness).toBe(40);
+         done();
+      }, 10010)
    })
 
    it("should gain 10 fitness points and get 10 points hungrier when walked", () => {
