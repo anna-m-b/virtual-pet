@@ -4,7 +4,7 @@
   "description": "Bootcamp project: Build a virtual pet.",
   "main": "index.js",
   "scripts": {
-    "test": "jest --verbose --bail"
+    "test": "jest --verbose --watch --detectOpenHandles"
   },
   "author": "Anna Balquin",
   "license": "ISC",
@@ -13,3 +13,4 @@
   }
   
 }
+ 
