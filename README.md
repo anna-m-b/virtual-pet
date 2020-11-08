@@ -1,5 +1,5 @@
 
-# Virtual Pet - Coming Soon
+# Virtual Pet -  a JavaScript project
 
 At bootcamp, we are learning about **OOP** in JavaScript. To help us grasp these concepts our task is to build a **virtual pet**. I'm feeling nostalgic for my old tamagotchi now.
 
