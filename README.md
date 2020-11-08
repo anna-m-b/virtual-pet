@@ -15,6 +15,7 @@ We are also learning **TDD**. This project will come with a full test suite writ
 - [x]  You can talk to your pet to see if it needs feeding or walking
 - [x]  If your pet gets too hungry or unfit, it will DIE 💀
 - [x]  If your pet gets to 30 days old it will DIE 😢
+- [x]  Your pet can have babies
 
 *Feature list taken from the Manchester Codes dashboard*
 
@@ -53,16 +54,13 @@ Now you're ready to create your pet! You can do this as below, replacing both in
 Enter yourPetName into the terminal and you should see:
 
       {
-      dayLength: 10000,
       name: 'yourPetName',
-      _age: 0,
-      _hunger: 50,
-      _fitness: 50,
-      _availableMethods: [ 'start()', 'walk()', "feed('carrot')", "feed('treat')", 'checkUp()' ]
+      age: 0,
+      hunger: 50,
+      fitness: 50,
+      children: [],
+      availableMethods: [ 'start('dayLength')', 'walk()', "feed('carrot')", "feed('treat')", 'checkUp()', 'haveBaby('name')' ]
       }
-
-
-dayLength corresponds to the amount of time a day takes, in milliseconds. With each day that passes, your pet's age will increase by 1, its hunger level by 5 and its fitness level will decrease by 5. 
 
 Your pet will die if
 - it reaches 30 days old
@@ -70,17 +68,13 @@ Your pet will die if
 - its fitness level falls to 0
 
 
-Before beginning the day cycle, you have the option of changing the dayLength. For example:
+To set things in motion we need to call start and pass in a time in milliseconds that will set the length of a day. For example:
 
-`$ yourPetName.dayLength = 20000`
+`$ yourPetName.start(20000)`
 
-Now, each day will be 20 seconds long.
+Each day cycle will now be 20 seconds. Every 20 seconds your pet will get 1 point older, 5 points hungrier and 5 points less fit.
 
-When you're happy with the day length call start() to get things going:
-
-`$ yourPetName.start()`
-
-To prevent your getting hungry and unfit, you can walk and feed your pet as shown in the avaiableMethods property. You can also see how your pet is doing and get a hint as to what it might need by calling checkUp:
+To prevent your pet getting hungry and unfit, you can walk and feed your pet as shown in the avaiableMethods property. You can also see how your pet is doing and get a hint as to what it might need by calling checkUp:
 
 `$ yourPetName.checkUp()`
 
@@ -88,10 +82,15 @@ Example output: `"I'm getting peckish, how about a snack? Also, I'm restless, le
 
 Try walking and feeding your pet. How does it respond?
 
+Pets can also have babies. Just run:
 
-*Note* 
-The underscore preceding age, hunger and fitness and availableMethods indicates that these properties shouldn't be manipulated directly.
+`$ yourPetName.haveBaby('babyName')`
 
+Then, check:
+
+`$ yourPetName.children`
+
+You should see an array containing the your pet's new baby! Congratulations on your expanding family.
 
 ***
 ## Running the tests 
