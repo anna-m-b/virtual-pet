@@ -172,7 +172,6 @@ describe("an instance of Pet", () => {
 
    it('throw an error if pet is dead and user tries to interact with it', () => {
       fluffy._age = 30;
-      // jest.advanceTimersByTime(10000);
       expect( () => fluffy.walk()).toThrow('fluffy has moved on to the next realm and can no longer be played with :(')
       expect( () => fluffy.feed()).toThrow('fluffy has moved on to the next realm and can no longer be played with :(')
       expect( () => fluffy.checkUp()).toThrow('fluffy has moved on to the next realm and can no longer be played with :(')
@@ -180,5 +179,3 @@ describe("an instance of Pet", () => {
 
 })
 
-
-// how to test the setInterval function and for the error thrown there?
