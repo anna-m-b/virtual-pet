@@ -13,8 +13,8 @@ We are also learning **TDD**. This project will come with a full test suite writ
 - [x]  You can walk your pet to increase its fitness. 🏃‍♂️
 - [x]  You can feed your pet to decrease its hunger. 🍕
 - [x]  You can talk to your pet to see if it needs feeding or walking
-- [ ]  If your pet gets too hungry or unfit, it will DIE 💀
-- [ ]  If your pet gets to 30 days old it will DIE 😢
+- [x]  If your pet gets too hungry or unfit, it will DIE 💀
+- [x]  If your pet gets to 30 days old it will DIE 😢
 
 *Feature list taken from the Manchester Codes dashboard*
 

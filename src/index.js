@@ -1,9 +1,103 @@
 const MAX_AGE = 30, MAX_HUNGER = 100, MAX_FITNESS = 100;
-const MIN_HUNGER = 0, MIN_FITNESS = 0;
+const MIN_AGE = 0, MIN_HUNGER = 0, MIN_FITNESS = 0;
 
+const causesOfDeath = {
+   oldAge: `Your pet has passed away from old age 😢 They had a good run 😌`,
+   illHealth: `Your pet has died due to lack of walks 😭 Take better care of your pets!`,
+   hunger: `Your pet has died of starvation 😱 Take better care of your pets!`
+};
+
+const deadPetMessage = `has moved on to the next realm and can no longer be played with :(`
+
+function Pet(name) {
+   this.name = name;
+   this.age = 0;
+   this.hunger = 50;
+   this.fitness = 50;
+   this.start();
+}
+
+Pet.prototype = {
+   start () {
+      const dayPassing = setInterval( () => { 
+         console.log(this.petStatus)
+         if(!this.isAlive) {
+            clearInterval(dayPassing)
+            throw new Error(`${this.name} ${deadPetMessage}`);
+         }
+         this.growUp();
+         this.increaseHunger(5);
+         this.decreaseFitness(5);
+         
+      }, 10000);
+   },  
+   get isAlive() {
+      return this.age < MAX_AGE && this.hunger < MAX_HUNGER && this.fitness > MIN_FITNESS;
+      },
+   get petStatus() {
+         if (this.age >= MAX_AGE) {
+            return causesOfDeath.oldAge;
+         } else if (this.hunger >= MAX_HUNGER) {
+            return causesOfDeath.hunger;
+         } else if (this.fitness <= MIN_FITNESS) {
+            return causesOfDeath.illHealth;
+         } else {
+            return `${this.name} is live and kicking. Don't forget to checkUp on them!`
+         }
+      },
+   growUp () {
+      this.age = ((this.age + 1) >= MAX_AGE) ? MAX_AGE : this.age + 1;
+    },
+   decreaseHunger(amount) {
+     this.hunger = ((this.hunger - amount) <= MIN_HUNGER) ? MIN_HUNGER : this.hunger - amount;
+   },
+   increaseHunger(amount) {
+     this.hunger = ((this.hunger + amount) >= MAX_HUNGER) ? MAX_HUNGER : this.hunger + amount;
+   },
+   decreaseFitness(amount) {
+      this.fitness = ((this.fitness - amount) <= MIN_FITNESS) ? MIN_FITNESS : this.fitness - amount;
+   },
+   increaseFitness(amount) {
+     this.fitness = ((this.fitness + amount) >= MAX_FITNESS) ? MAX_FITNESS : this.fitness + amount;
+   },
+   walk() {
+      if(!this.isAlive) {
+         throw new Error(`${this.name} ${deadPetMessage}`);
+      }
+      this.increaseFitness(10);
+      this.increaseHunger(10);
+      return `What a beautiful day! My fitness level is now ${this.fitness} and my hunger level is now ${this.hunger}`
+   },
+   feed(food) {
+      if(!this.isAlive) {
+         throw new Error(`${this.name} ${deadPetMessage}`);
+      }
+      if (food === 'carrot') {
+         this.decreaseHunger(20)
+         this.increaseFitness(5) 
+         return `Mmm veggies, thanks! My hunger level is now ${this.hunger} and my fitness level is now ${this.fitness}`
+      } else if (food === 'treat') { 
+         this.decreaseHunger(5)
+         this.decreaseFitness(5)
+         return `DELICIOUS treat, thanks! My hunger level is now ${this.hunger} and my fitness level is now ${this.fitness}`
+      } else {
+         return `I don't like ${food}. Please feed me a carrot or a treat!`;
+      }
+   },
+   checkUp() {
+      if(!this.isAlive) {
+         throw new Error(`${this.name} ${deadPetMessage}`);
+      }
+      const fitness = checkFitness(this);
+      const hunger = checkHunger(this);
+      return `${hunger} Also, ${fitness}`;
+   }
+}
+
+ 
 function checkHunger(pet) {
    switch (true) {
-    case pet.hunger > 80:
+    case pet.hunger > 80: 
        return "I'm STARVING.";
        break;
     case pet.hunger > 60:
@@ -19,94 +113,44 @@ function checkHunger(pet) {
        return "I'm stuffed!";
        break;
     default:
-       return "Sorry, I don't quite know.";
+       return "Sorry, I don't quite know how hungry I am";
    }
 }
 
 function checkFitness(pet) {
    switch(true) {
-    case pet.fitness > 80:
-      return "I'm PUMPED! I CAN DO ANYTHING!";
-      break;
-   case pet.fitness > 60:
-      return "I feel STRONG";
-      break;
-   case pet.fitness > 40:
-      return "I'm restless, let's go for a walk!";
-      break;
-   case pet.fitness < 40 && pet.fitness > 20:
-      return "I don't feel so good, when did we last go for a walk?";
-      break;
-   case pet.fitness < 20:
-      return "I feel weak. Maybe I need to exercise?";
-      break;
-   default:
-      return "Sorry, I don't quite know";
- }
-}
-
-function Pet(name) {
-   this.isAlive = true;
-   this.name = name;
-   this.age = 0;
-   this.hunger = 50;
-   this.fitness = 50;
-
-   this.start();
-}
-
-Pet.prototype = {
-   start () {
-      setInterval( () => { 
-         this.growUp()
-         this.increaseHunger(15)
-         this.decreaseFitness(10)
-      }, 10000);
-   },
-   growUp () {
-      this.age = (this.age + 1) === MAX_AGE ? MAX_AGE : this.age + 1;
-    },
-   decreaseHunger(amount) {
-     this.hunger = (this.hunger - amount) <= MIN_HUNGER ? MIN_HUNGER : this.hunger - amount;
-   },
-   increaseHunger(amount) {
-     this.hunger = (this.hunger + amount) >= MAX_HUNGER ? MAX_HUNGER : this.hunger + amount;
-   },
-   decreaseFitness(amount) {
-      this.fitness= (this.fitness - amount) <= MIN_FITNESS ? MIN_FITNESS : this.fitness - amount;
-   },
-   increaseFitness(amount) {
-     this.fitness = (this.fitness + amount) >= MAX_FITNESS ? MAX_FITNESS : this.fitness + amount;
-   },
-   walk() {
-      this.increaseFitness(10);
-      this.increaseHunger(10);
-      return `What a beautiful day! My fitness level is now ${this.fitness} and my hunger level is now ${this.hunger}`
-   },
-   feed(food) {
-      if (food === 'carrot') {
-         this.decreaseHunger(20)
-         this.increaseFitness(5) 
-         return `Mmm veggies, thanks! My hunger level is now ${this.hunger} and my fitness level is now ${this.fitness}`
-      } else if (food === 'treat') { 
-         this.decreaseHunger(5)
-         this.decreaseFitness(5)
-         return `DELCIOUS treat, thanks! My hunger level is now ${this.hunger} and my fitness level is now ${this.fitness}`
-      } else {
-         return `I don't like ${food}. Please feed me a carrot or a treat!`;
-      }
-   },
-   checkUp() {
-      const fitness = checkFitness(this);
-      const hunger = checkHunger(this);
-      return `${hunger} Also, ${fitness}`;
-   }
+      case pet.fitness > 80:
+         return "I'm PUMPED! I CAN DO ANYTHING!";
+         break;
+      case pet.fitness > 60:
+         return "I feel STRONG";
+         break;
+      case pet.fitness >= 40:
+         return "I'm restless, let's go for a walk!";
+         break;
+      case pet.fitness < 40 && pet.fitness >= 20:
+         return "I don't feel so good, when did we last go for a walk?";
+         break;
+      case pet.fitness < 20:
+         return "I feel weak. Maybe I need to exercise?";
+         break;
+      default:
+         return "Sorry, I don't quite know what my fitness level is";
+  }
 }
 
 
-module.exports = Pet;
-
-// passing exports a module causes an error - the test doesn't receive it as a constructor
 
 
-// we need a function that takes care of the passing of the days
+
+module.exports = { 
+      Pet,
+      MAX_AGE,
+      MAX_HUNGER,
+      MAX_FITNESS,
+      MIN_AGE,
+      MIN_HUNGER,
+      MIN_FITNESS
+}
+      
+
