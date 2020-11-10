@@ -15,11 +15,14 @@ function Pet(name) {
    this.hunger = 50;
    this.fitness = 50;
    this.children = [];
-   this.availableMethods = [`start()`, `walk()`, `feed('carrot')`, `feed('treat')`, `checkUp()`, `haveBaby()`];
+   this.availableMethods = `start(length-of-day), walk(), feed('carrot'), feed('treat'), checkUp(), haveBaby('name')`;
 }
 
 Pet.prototype = {
     start(dayLength) {
+      if (typeof(dayLength) !== "number" || dayLength < 5000) {
+         throw new Error("the start method must be passed a number that is equal to or greater than 5000");
+      }
       if(!this.isAlive) {
          throw new Error(`${this.name} ${deadPetMessage}`);
       } else {
@@ -77,6 +80,9 @@ Pet.prototype = {
       if(!this.isAlive) {
          throw new Error(`${this.name} ${deadPetMessage}`);
       }
+      if(!food) {
+         throw new Error("You cannot feed your pet air: please try 'carrot' or 'treat'")
+      }
       if (food === 'carrot') {
          this.decreaseHunger(20)
          this.increaseFitness(5) 
@@ -101,12 +107,13 @@ Pet.prototype = {
       if(!this.isAlive) {
          throw new Error(`${this.name} ${deadPetMessage}`);
       }
+      if(!name || typeof(name) !== "string") {
+         throw new Error("Please pass in a valid name for the baby - this must be string and cannot be empty")
+      }
       this.children.push(new Pet(name))
    }
-
 }
 
- 
 function checkHunger(pet) {
    switch (true) {
     case pet.hunger > 80: 

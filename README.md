@@ -59,7 +59,7 @@ Enter yourPetName into the terminal and you should see:
       hunger: 50,
       fitness: 50,
       children: [],
-      availableMethods: [ 'start('dayLength')', 'walk()', "feed('carrot')", "feed('treat')", 'checkUp()', 'haveBaby('name')' ]
+      availableMethods: [ 'start(dayLength)', 'walk()', "feed('carrot')", "feed('treat')", 'checkUp()', 'haveBaby('name')' ]
       }
 
 Your pet will die if
@@ -68,7 +68,7 @@ Your pet will die if
 - its fitness level falls to 0
 
 
-To set things in motion we need to call start and pass in a time in milliseconds that will set the length of a day. For example:
+To set things in motion we need to call start and pass in a time in milliseconds (minimum is 5000) that will set the length of a day. For example:
 
 `$ yourPetName.start(20000)`
 
@@ -90,7 +90,7 @@ Then, check:
 
 `$ yourPetName.children`
 
-You should see an array containing the your pet's new baby! Congratulations on your expanding family.
+You should see an array containing your pet's new baby! Congratulations on your expanding family.
 
 ***
 ## Running the tests 

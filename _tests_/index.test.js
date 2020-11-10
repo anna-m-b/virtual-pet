@@ -32,6 +32,10 @@ describe("Pet constructor", () => {
       expect(fluffy).toHaveProperty("fitness", 50)
    })
 
+   it(`should have a "children" property set to an empty array`, () => {
+      expect(fluffy).toHaveProperty("children", [])
+   })
+
  })
 
 
@@ -71,6 +75,8 @@ describe("Pet prototype", () => {
       expect(typeof Pet.prototype.feed).toBe("function")
    })
 
+  
+
    it("should have a walk method", () => {
       expect(Pet.prototype).toHaveProperty("walk");
       expect(typeof Pet.prototype.walk).toBe("function")
@@ -85,6 +91,13 @@ describe("Pet prototype", () => {
       expect(Pet.prototype).toHaveProperty("petStatus");
       expect(typeof Pet.prototype.petStatus).toBe("string")
    })
+
+   it("should have a haveBaby method", () => {
+      expect(Pet.prototype).toHaveProperty("haveBaby");
+      expect(typeof Pet.prototype.haveBaby).toBe("function")
+   })
+
+
 
 })
 
@@ -107,6 +120,11 @@ describe("an instance of Pet", () => {
       expect(fluffy.fitness).toBe(45);
    })
 
+   it("the start method should throw an error if passed >= 5000 or a value other than a number", () => {
+      expect( () => fluffy.start(0)).toThrow("the start method must be passed a number that is equal to or greater than 5000")
+      expect( () => fluffy.start("")).toThrow("the start method must be passed a number that is equal to or greater than 5000")
+   })
+
    it("should gain 10 fitness points and get 10 points hungrier when walked", () => {
       fluffy.walk();
       expect(fluffy.fitness).toBe(60);
@@ -123,6 +141,10 @@ describe("an instance of Pet", () => {
       fluffy.feed("treat");
       expect(fluffy.fitness).toBe(45);
       expect(fluffy.hunger).toBe(45);
+   })
+
+   it("the feed method should throw an error if no argument is received", () => {
+      expect( () => fluffy.feed()).toThrow("You cannot feed your pet air: please try 'carrot' or 'treat'")
    })
 
    it("should return an informative string when fed something that is not a carrot or a treat", () => {
@@ -172,7 +194,7 @@ describe("an instance of Pet", () => {
       expect(fluffy.isAlive).toBe(false);
    })
 
-   it('throw an error if pet is dead and user tries to interact with it', () => {
+   it('should throw an error if pet is dead and user tries to interact with it', () => {
       fluffy.age = 30;
       expect( () => fluffy.walk()).toThrow('fluffy has moved on to the next realm and can no longer be played with :(')
       expect( () => fluffy.feed()).toThrow('fluffy has moved on to the next realm and can no longer be played with :(')
@@ -184,7 +206,13 @@ describe("an instance of Pet", () => {
       fluffy.haveBaby('spot')
       expect(fluffy.children).toHaveLength(1);
       expect(fluffy.children[0]).toHaveProperty('name', 'spot')
-   })      
+   })
+
+   it("the haveBaby method should throw an error if passed an empty string or a non-string value", () => {
+      expect( () => fluffy.haveBaby("")).toThrow("Please pass in a valid name for the baby - this must be string and cannot be empty")
+      expect( () => fluffy.haveBaby()).toThrow("Please pass in a valid name for the baby - this must be string and cannot be empty")
+      expect( () => fluffy.haveBaby(5)).toThrow("Please pass in a valid name for the baby - this must be string and cannot be empty")
+   })
 
 })
 
